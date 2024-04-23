@@ -1,0 +1,15 @@
+let calcDisplay = document.getElementById("calcDisplay");
+
+Array.from(document.getElementsByClassName("numButton")).forEach(button => {
+    button.addEventListener("click", () => {
+        displayText(button.textContent);
+    });
+});
+
+function displayText(buttonText) {
+    console.log(buttonText);
+    if(buttonText == "backspace")
+        calcDisplay.value = calcDisplay.value.slice(0, -1); 
+    else
+        calcDisplay.value += buttonText;
+}

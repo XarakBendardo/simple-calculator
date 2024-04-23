@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('image.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:rgb(0, 0, 100);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.calcDisplay {
+    width: 600px;
+    border-radius: 10px;
+    background-color: rgb(60, 60, 60);
+    padding: 10px;
+    margin: 10px;
+    font-size: 32px;
+    color: white
+}
+
+.calcDisplay:hover {
+    background-color: rgb(50, 50, 50);
+}
+
+.calcDisplay:focus {
+    outline: none;
+}
+
+.buttonsDiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+}
+
+.numButton {
+    width: 150px;
+    border-radius: 100%;
+    font-size: 64px;
+    background-color: rgb(60, 60, 60);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    border: 1px solid white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+}
+
+.numButton:hover {
+    background-color: rgb(50, 50, 50);
+}
+
+.numButton:active {
+    background-color: black;
+}
+
+.material-icons {
+    font-size: 64px;
+    color: white;
+}
+
+.buttonsPanel {
+    display: flex;
+}
+
+.operationsPanel {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+}

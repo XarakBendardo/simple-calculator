@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="mainDiv" class="container">
+        <input id="calcDisplay" class="calcDisplay" readonly></input>
+        <div id="buttonsPanel" class="buttonsPanel">
+            <div id="numButtons" class="buttonsDiv">
+                <button id="num1" class="numButton">1</button>
+                <button id="num2" class="numButton">2</button>
+                <button id="num3" class="numButton">3</button>
+                <button id="num4" class="numButton">4</button>
+                <button id="num5" class="numButton">5</button>
+                <button id="num6" class="numButton">6</button>
+                <button id="num7" class="numButton">7</button>
+                <button id="num8" class="numButton">8</button>
+                <button id="num9" class="numButton">9</button>
+                <button id="num0" class="numButton">0</button>
+                <button id="comma" class="numButton">,</button>
+                <button id="backspace" class="numButton"><i class="material-icons">backspace</i></button>
+            </div>
+            <div id="operations" class="operationsPanel">
+                <button id="add" class="numButton">+</button>
+                <button id="subtract" class="numButton">-</button>
+                <button id="multiply" class="numButton">*</button>
+                <button id="devide" class="numButton">&#247</button>
+                <button id="equals" class="numButton">=</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="calc.js"> </script>
+</body>
+</html>
