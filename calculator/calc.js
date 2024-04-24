@@ -15,9 +15,8 @@ function displayText(buttonText) {
 }
 
 function toInfixConvention(string) {
-    // 3 + (123+44)*5 - (222-4)
-    function isDigit(char) {
-        return (char >= '0' && char <= '9');
+    function isNumericElement(char) {
+        return ((char >= '0' && char <= '9') || char == '.');
     }
 
     let expresion = [];
@@ -25,12 +24,11 @@ function toInfixConvention(string) {
     let i = 0, j;
     while(i < string.length) {
         number = "";
-        if(!isDigit(string.charAt(i)) && (i == 0 || !isDigit(string.charAt(i - 1)))) {
-            if (string.charAt(i) !== '-') throw new Error("Incorrect input format");
+        if(string.charAt(i) == '-' && (i == 0 || !isNumericElement(string.charAt(i - 1)))) {
             number += string.charAt(i);
             ++i;
         }
-        for(j = i; isDigit(string.charAt(j)) && j < string.length; ++j)
+        for(j = i; isNumericElement(string.charAt(j)) && j < string.length; ++j)
             number += string.charAt(j);
         
         if(number != "") {
@@ -45,3 +43,5 @@ function toInfixConvention(string) {
 
     return expresion;
 }
+
+// console.log(toInfixConvention("1.5+(12-4)*-5.6+2"));
