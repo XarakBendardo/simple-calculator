@@ -66,6 +66,10 @@ body {
     background-color: black;
 }
 
+#equals {
+    background-color: rgb(138, 30, 138);/*238, 130, 238*/
+}
+
 .material-icons {
     font-size: 64px;
     color: white;
