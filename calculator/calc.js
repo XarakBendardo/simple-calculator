@@ -1,4 +1,4 @@
-import { validateExpression, toInfixConvention } from "./expression.js";
+import { evaluate } from "./expression.js";
 
 
 let calcDisplay = document.getElementById("calcDisplay");
@@ -18,5 +18,9 @@ document.getElementById("clear").addEventListener("click", () => {
 });
 
 document.getElementById("equals").addEventListener("click", () => {
-    console.log(validateExpression(calcDisplay.value));
+    try {
+        console.log(evaluate(calcDisplay.value));
+    } catch(e) {
+        console.error(e.message);
+    }
 });

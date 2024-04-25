@@ -1,12 +1,35 @@
 const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const operators = ['+', '-', '*', '÷'];
+const operatorsPriority = new Map([
+    ['+', 0],
+    ['-', 0],
+    ['*', 1],
+    ['÷', 1],
+]);
 
+function createStack() {
+    return {
+        items : [],
+        push(item) {
+            this.items.push(item);
+        },
 
-export function validateExpression(expresion) {
-    function isIn(val, array) {
-        return array.indexOf(val) != -1;
-    }
+        pop() {
+            return this.items.pop();
+        },
 
+        top() {
+            if(this.items.length == 0) return null;
+            return this.items[this.items.length - 1];
+        }
+    };
+}
+
+function isIn(val, array) {
+    return array.indexOf(val) != -1;
+}
+
+function validateExpression(expresion) {
     function canPutCharacter(current, previous) {
         if(isIn(previous, digits)) {
             return isIn(current, [...digits, ...operators, ')', '.']);
@@ -46,7 +69,6 @@ export function validateExpression(expresion) {
             --parCount;
         if(!canPutCharacter(current, previous))
             return false;
-        console.log(parCount);
     }
     return parCount == 0;
 }
@@ -79,4 +101,39 @@ export function toInfixConvention(string) {
     }
 
     return expresion;
+}
+
+function toinvertedPolishConvention(expresion) {
+    let converted = [], element, stack = createStack();
+    for(element of expresion) {
+        if(element == '(') {
+            stack.push(element);
+        }
+        else if(element == ')') {
+            while(stack.top() && stack.top() != '(') converted.push(stack.pop());
+            stack.pop();
+        }
+        else if(isIn(element, operators)) {
+            while(stack.top() && isIn(stack.top(), operators)
+            && operatorsPriority.get(stack.top()) >= operatorsPriority.get(element))
+                converted.push(stack.pop());
+            stack.push(element);
+        }
+        else {
+            //Numbers
+            converted.push(element);
+        }
+    }
+
+    while(stack.top())
+        converted.push(stack.pop());
+
+    return converted;
+}
+
+export function evaluate(string) {
+    if(!validateExpression(string))
+        throw new Error("Incorrect expression");
+    let expresion = toInfixConvention(string);
+    return toinvertedPolishConvention(expresion);
 }
