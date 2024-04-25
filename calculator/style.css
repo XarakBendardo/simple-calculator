@@ -11,6 +11,28 @@ body {
     background-attachment: fixed;
 }
 
+button {
+    width: 150px;
+    border-radius: 100%;
+    font-size: 64px;
+    background-color: rgb(60, 60, 60);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    border: 1px solid white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+}
+
+button:hover {
+    background-color: rgb(50, 50, 50);
+}
+
+button:active {
+    background-color: black;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -44,30 +66,16 @@ body {
     justify-content: center;
 }
 
-.numButton {
-    width: 150px;
-    border-radius: 100%;
-    font-size: 64px;
-    background-color: rgb(60, 60, 60);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px;
-    border: 1px solid white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
-}
-
-.numButton:hover {
-    background-color: rgb(50, 50, 50);
-}
-
-.numButton:active {
-    background-color: black;
-}
-
 #equals {
-    background-color: rgb(138, 30, 138);/*238, 130, 238*/
+    background-color: rgb(138, 30, 138);
+}
+
+#equals:hover {
+    background-color: rgb(118, 10, 118);
+}
+
+#equals:active {
+    background-color: rgb(98, 0, 98);
 }
 
 .material-icons {
