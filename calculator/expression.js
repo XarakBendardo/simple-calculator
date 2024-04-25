@@ -73,7 +73,7 @@ function validateExpression(expresion) {
     return parCount == 0;
 }
 
-export function toInfixConvention(string) {
+export function extractTokens(string) {
     function isNumericElement(char) {
         return ((char >= '0' && char <= '9') || char == '.');
     }
@@ -134,6 +134,6 @@ function toinvertedPolishConvention(expresion) {
 export function evaluate(string) {
     if(!validateExpression(string))
         throw new Error("Incorrect expression");
-    let expresion = toInfixConvention(string);
+    let expresion = extractTokens(string);
     return toinvertedPolishConvention(expresion);
 }
