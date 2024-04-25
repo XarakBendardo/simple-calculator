@@ -135,5 +135,5 @@ export function evaluate(string) {
     if(!validateExpression(string))
         throw new Error("Incorrect expression");
     let expresion = extractTokens(string);
-    return toinvertedPolishConvention(expresion);
+    
 }
