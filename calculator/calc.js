@@ -3,17 +3,20 @@ import { validateExpression, toInfixConvention } from "./expression.js";
 
 let calcDisplay = document.getElementById("calcDisplay");
 
-Array.from(document.getElementsByClassName("numButton")).forEach(button => {
+Array.from(document.getElementsByClassName("exprElementsButton")).forEach(button => {
     button.addEventListener("click", () => {
-        displayText(button.textContent);
+        calcDisplay.value += button.textContent;
     });
 });
 
-function displayText(buttonText) {
-    let textContent = calcDisplay.value;
-    console.log(textContent);
-    if(buttonText == "backspace")
-        calcDisplay.value = calcDisplay.value.slice(0, -1);
-    else
-        calcDisplay.value += buttonText;
-}
+document.getElementById("backspace").addEventListener("click", () => {
+    calcDisplay.value = calcDisplay.value.slice(0, -1);
+});
+
+document.getElementById("clear").addEventListener("click", () => {
+    calcDisplay.value = "";
+});
+
+document.getElementById("equals").addEventListener("click", () => {
+    console.log(validateExpression(calcDisplay.value));
+});
