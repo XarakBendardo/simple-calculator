@@ -19,7 +19,7 @@ document.getElementById("clear").addEventListener("click", () => {
 
 document.getElementById("equals").addEventListener("click", () => {
     try {
-        console.log(evaluate(calcDisplay.value));
+        calcDisplay.value = evaluate(calcDisplay.value);
     } catch(e) {
         console.error(e.message);
     }

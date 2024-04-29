@@ -1,11 +1,18 @@
 const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const operators = ['+', '-', '*', '÷'];
+const parsed_operators = [...operators, 'u-'];
 const operatorsPriority = new Map([
     ['+', 0],
     ['-', 0],
     ['*', 1],
     ['÷', 1],
+    ['u-', 2], // unary minus, like -5, -(4 + 3), etc.
 ]);
+
+function isNumber(str) {
+    // Regular expression to match a float number
+   return /^-?\d+(\.\d+)?$/.test(str);
+}
 
 function createStack() {
     return {
@@ -84,7 +91,7 @@ export function extractTokens(string) {
     while(i < string.length) {
         number = "";
         if(string.charAt(i) == '-' && (i == 0 || !isNumericElement(string.charAt(i - 1)))) {
-            number += string.charAt(i);
+            expresion.push('u-');
             ++i;
         }
         for(j = i; isNumericElement(string.charAt(j)) && j < string.length; ++j)
@@ -103,7 +110,7 @@ export function extractTokens(string) {
     return expresion;
 }
 
-function toinvertedPolishConvention(expresion) {
+function toReversedPolishConvention(expresion) {
     let converted = [], element, stack = createStack();
     for(element of expresion) {
         if(element == '(') {
@@ -113,8 +120,8 @@ function toinvertedPolishConvention(expresion) {
             while(stack.top() && stack.top() != '(') converted.push(stack.pop());
             stack.pop();
         }
-        else if(isIn(element, operators)) {
-            while(stack.top() && isIn(stack.top(), operators)
+        else if(isIn(element, parsed_operators)) {
+            while(stack.top() && isIn(stack.top(), parsed_operators)
             && operatorsPriority.get(stack.top()) >= operatorsPriority.get(element))
                 converted.push(stack.pop());
             stack.push(element);
@@ -134,6 +141,36 @@ function toinvertedPolishConvention(expresion) {
 export function evaluate(string) {
     if(!validateExpression(string))
         throw new Error("Incorrect expression");
-    let expresion = extractTokens(string);
-    
+    let expresion = toReversedPolishConvention(extractTokens(string));
+
+    let numbersStack = createStack();
+    let numb1, numb2;
+    for(let token of expresion) {
+        if(isNumber(token)) {
+            numbersStack.push(parseFloat(token));
+        }
+        else if (token == 'u-') {
+            numbersStack.push(-numbersStack.pop());
+        }
+        else {
+            numb2 = numbersStack.pop();
+            numb1 = numbersStack.pop();
+            switch(token) {
+            case '+':
+                numbersStack.push(numb1 + numb2);
+                break;
+            case '-':
+                numbersStack.push(numb1 - numb2);
+                break;
+            case '*':
+                numbersStack.push(numb1 * numb2);
+                break;
+            case '÷':
+                if(numb2 == 0) throw new Error("Division by 0!");
+                numbersStack.push(numb1 / numb2);
+                break;
+            }
+        }
+    }
+    return numbersStack.pop();
 }
