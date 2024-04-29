@@ -1,11 +1,18 @@
 import { evaluate } from "./expression.js";
 
+let promptOnScreen = false;
+
 
 let calcDisplay = document.getElementById("calcDisplay");
 
 Array.from(document.getElementsByClassName("exprElementsButton")).forEach(button => {
     button.addEventListener("click", () => {
-        calcDisplay.value += button.textContent;
+        if(promptOnScreen) {
+            calcDisplay.value = button.textContent;
+            promptOnScreen = false;
+        }
+        else
+            calcDisplay.value += button.textContent;
     });
 });
 
@@ -21,6 +28,7 @@ document.getElementById("equals").addEventListener("click", () => {
     try {
         calcDisplay.value = evaluate(calcDisplay.value);
     } catch(e) {
-        console.error(e.message);
+        calcDisplay.value = e.message;
+        promptOnScreen = true;
     }
 });
