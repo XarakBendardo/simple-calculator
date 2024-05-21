@@ -1,6 +1,6 @@
-const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-const operators = ['+', '-', '*', '÷'];
-const parsed_operators = [...operators, 'u-'];
+export const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+export const operators = ['+', '-', '*', '÷'];
+export const parsed_operators = [...operators, 'u-'];
 const operatorsPriority = new Map([
     ['+', 0],
     ['-', 0],
@@ -9,7 +9,7 @@ const operatorsPriority = new Map([
     ['u-', 2], // unary minus, like -5, -(4 + 3), etc.
 ]);
 
-function isNumber(str) {
+export function isNumber(str) {
     // Regular expression to match a float number
    return /^-?\d+(\.\d+)?$/.test(str);
 }
@@ -32,7 +32,7 @@ function createStack() {
     };
 }
 
-function isIn(val, array) {
+export function isIn(val, array) {
     return array.indexOf(val) != -1;
 }
 
@@ -142,6 +142,8 @@ export function evaluate(string) {
     if(!validateExpression(string))
         throw new Error("Incorrect expression");
     let expresion = toReversedPolishConvention(extractTokens(string));
+    // console.log(expresion);
+    expresion = ['7.8885', '5.8', '*', 'u-', '4', '2.8', '-', 'u-', '3', 'u-', '÷'];
 
     let numbersStack = createStack();
     let numb1, numb2;
@@ -172,5 +174,6 @@ export function evaluate(string) {
             }
         }
     }
+    console.log(numbersStack.items);
     return numbersStack.pop();
 }
