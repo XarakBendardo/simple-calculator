@@ -1,4 +1,4 @@
-import { evaluate, isIn, operators, digits, isNumber } from "./expression.js";
+import { evaluate, isIn, operators, digits } from "./expression2.js";
 
 let promptOnScreen = false;
 let calcDisplay = document.getElementById("calcDisplay");
@@ -8,8 +8,8 @@ let lastInput = "";
 function addToExpression(token) {
     if(isIn(token, [...digits, '.']) && isIn(lastInput, [...digits, '.']))
         inputExpression[inputExpression.length - 1] += token;
-    else if(token == "-" && isIn(lastInput, [...operators, ""]))
-        inputExpression.push('u-');
+    else if(token == "-" && isIn(lastInput, [...operators, "", '(']))
+        inputExpression.push('~');
     else
         inputExpression.push(token);
     lastInput = token;
@@ -56,7 +56,8 @@ document.getElementById("clear").addEventListener("click", () => {
 
 document.getElementById("equals").addEventListener("click", () => {
     try {
-        calcDisplay.value = evaluate(calcDisplay.value);
+        evaluate(inputExpression);
+        // calcDisplay.value = evaluate(calcDisplay.value);
     } catch(e) {
         calcDisplay.value = e.message;
         promptOnScreen = true;
