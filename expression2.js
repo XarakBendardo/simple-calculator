@@ -49,7 +49,7 @@ function toReversedPolishConvention(expression) {
         }
         else if(isIn(token, parsed_operators)) {
             while(stack.top() && isIn(stack.top(), parsed_operators)
-            && operatorsPriority.get(stack.top()) >= operatorsPriority.get(token))
+            && operatorsPriority.get(stack.top()) > operatorsPriority.get(token))
                 converted.push(stack.pop());
             stack.push(token);
         }
