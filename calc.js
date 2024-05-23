@@ -35,7 +35,6 @@ Array.from(document.getElementsByClassName("exprElementsButton")).forEach(button
         else
             calcDisplay.value += button.textContent;
         addToExpression(button.textContent);
-        console.log(inputExpression);
     });
 });
 
@@ -45,7 +44,6 @@ document.getElementById("backspace").addEventListener("click", () => {
         return;
     
     removeFromExpression();
-    console.log(inputExpression);
 });
 
 document.getElementById("clear").addEventListener("click", () => {
