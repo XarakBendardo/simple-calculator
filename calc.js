@@ -1,4 +1,4 @@
-import { evaluate, isIn, operators, digits } from "./expression2.js";
+import { evaluate, isIn, operators, digits } from "./expression.js";
 
 let promptOnScreen = false;
 let calcDisplay = document.getElementById("calcDisplay");
@@ -56,10 +56,12 @@ document.getElementById("clear").addEventListener("click", () => {
 
 document.getElementById("equals").addEventListener("click", () => {
     try {
-        evaluate(inputExpression);
-        // calcDisplay.value = evaluate(calcDisplay.value);
+        let val = evaluate(inputExpression);
+        calcDisplay.value = val;
+        inputExpression = [val];
     } catch(e) {
-        calcDisplay.value = e.message;
+        calcDisplay.value = "Incorrect input";
         promptOnScreen = true;
+        inputExpression = [];
     }
 });
